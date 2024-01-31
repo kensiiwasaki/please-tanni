@@ -21,7 +21,6 @@ app.get("/posts/:id", (c) => {
 });
 
 app.get("/api/users", (c) => {
-  // ここでユーザーデータを取得します。この例では、静的なデータを返します。
   const users = [
     { id: 1, name: "User One" },
     { id: 2, name: "User Two" },
