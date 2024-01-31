@@ -20,4 +20,13 @@ app.get("/posts/:id", (c) => {
   return c.text(`You want see ${page} of ${id}`);
 });
 
+app.get("/api/users", (c) => {
+  // ここでユーザーデータを取得します。この例では、静的なデータを返します。
+  const users = [
+    { id: 1, name: "User One" },
+    { id: 2, name: "User Two" },
+  ];
+  return c.json(users);
+});
+
 export default app;
