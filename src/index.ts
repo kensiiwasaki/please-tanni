@@ -12,7 +12,7 @@ app.get("/api/users/best", (c) => {
 });
 
 app.post("/api/users/best", async (c) => {
-  const newUser = await c.req.body();
+  const newUser = await c.req.parseBody();
   c.header("Content-Type", "application/json");
   c.status(201); // Created
   return c.json(newUser);
@@ -27,7 +27,7 @@ app.get("/api/users/bat", (c) => {
 });
 
 app.post("/api/users/bat", async (c) => {
-  const newUser = await c.req.body();
+  const newUser = await c.req.parseBody();
   return c.json(newUser);
 });
 
