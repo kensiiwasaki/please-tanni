@@ -2,8 +2,23 @@ import { Hono } from "hono";
 
 const app = new Hono();
 
-app.get("/api/users", (c) => {
-  // ここでユーザーデータを取得します。この例では、静的なデータを返します。
+app.get("/api/users/best", (c) => {
+  const users = [
+    { id: 1, name: "User One", link: "/api/users/1" },
+    { id: 2, name: "User Two", link: "/api/users/2" },
+  ];
+  c.header("Content-Type", "application/json");
+  return c.json(users);
+});
+
+app.post("/api/users/best", async (c) => {
+  const newUser = await c.req.body();
+  c.header("Content-Type", "application/json");
+  c.status(201); // Created
+  return c.json(newUser);
+});
+
+app.get("/api/users/bat", (c) => {
   const users = [
     { id: 1, name: "User One" },
     { id: 2, name: "User Two" },
@@ -11,11 +26,8 @@ app.get("/api/users", (c) => {
   return c.json(users);
 });
 
-// POSTリクエストの例
-app.post("/api/users", async (c) => {
-  // リクエストボディからデータを取得します。
+app.post("/api/users/bat", async (c) => {
   const newUser = await c.req.body();
-  // ここで新しいユーザーをデータベースに保存します。この例では、送信されたデータをそのまま返します。
   return c.json(newUser);
 });
 
