@@ -2,11 +2,20 @@
   "name": "please-tanni",
   "version": "0.1.0",
   "type": "module",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
   "dependencies": {
     "@typespec/compiler": "latest",
     "@typespec/http": "latest",
     "@typespec/rest": "latest",
-    "@typespec/openapi3": "latest"
+    "@typespec/openapi3": "latest",
+    "hono": "^3.12.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "wrangler": "^3.22.0"
   },
   "private": true
 }
