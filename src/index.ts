@@ -11,10 +11,21 @@ app.get("/api/users/best", (c) => {
   return c.json(users);
 });
 
+app.get("/api/users/:id", async (c) => {
+  const { id } = c.req.param();
+  const user = {
+    id,
+    name: "Sample User",
+    email: "user@example.com",
+  };
+
+  return c.json(user);
+});
+
 app.post("/api/users/best", async (c) => {
   const newUser = await c.req.parseBody();
   c.header("Content-Type", "application/json");
-  c.status(201); // Created
+  c.status(201);
   return c.json(newUser);
 });
 
