@@ -1,7 +1,6 @@
 import { Hono } from "hono";
 import { drizzle } from "drizzle-orm/d1";
 import users from "./schema";
-import { eq } from "drizzle-orm";
 
 type Bindings = {
   DB: D1Database;
@@ -18,10 +17,10 @@ app.get("/users/best", async (c) => {
   }
 
   c.header("Content-Type", "application/json");
-  return c.json(result);
+  return c.json({ result });
 });
 
-app.get("/users/bad", async (c) => {
+app.post("/users/bad", async (c) => {
   const db = drizzle(c.env.DB);
   const result = await db.select().from(users).all();
 
@@ -31,8 +30,7 @@ app.get("/users/bad", async (c) => {
 
   return c.json(
     {
-      message:
-        "Operation succeeded, but returning 400 due to specific conditions.",
+      result,
     },
     400,
   );
