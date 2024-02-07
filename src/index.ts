@@ -9,19 +9,33 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.get("/users", async (c) => {
-  // データベースからユーザー情報を取得
+app.get("/users/best", async (c) => {
   const db = drizzle(c.env.DB);
   const result = await db.select().from(users).all();
 
-  // 結果が空の場合は404 Not Foundを返す
   if (result.length === 0) {
     return c.json({ message: "No users found" }, 404);
   }
 
-  // 成功した場合は200 OKと共にユーザーデータを返す
   c.header("Content-Type", "application/json");
   return c.json(result);
+});
+
+app.get("/users/bad", async (c) => {
+  const db = drizzle(c.env.DB);
+  const result = await db.select().from(users).all();
+
+  if (result.length === 0) {
+    return c.json({ message: "No users found" }, 404);
+  }
+
+  return c.json(
+    {
+      message:
+        "Operation succeeded, but returning 400 due to specific conditions.",
+    },
+    400,
+  );
 });
 
 app.post("/users", async (c) => {
