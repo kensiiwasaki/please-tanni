@@ -45,13 +45,6 @@ app.get("/api/users/:id", async (c) => {
 
   return c.json(user);
 });
-app.get("/api/users/bat", (c) => {
-  const users = [
-    { id: 1, name: "User One" },
-    { id: 2, name: "User Two" },
-  ];
-  return c.json(users);
-});
 
 app.post("/api/users/bat", async (c) => {
   const newUser = await c.req.parseBody();
