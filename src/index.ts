@@ -12,10 +12,6 @@ app.get("/users/best", async (c) => {
   const db = drizzle(c.env.DB);
   const result = await db.select().from(users).all();
 
-  if (result.length === 0) {
-    return c.json({ message: "No users found" }, 404);
-  }
-
   c.header("Content-Type", "application/json");
   return c.json({ result });
 });
