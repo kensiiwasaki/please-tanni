@@ -46,9 +46,4 @@ app.get("/api/users/:id", async (c) => {
   return c.json(user);
 });
 
-app.post("/api/users/bat", async (c) => {
-  const newUser = await c.req.parseBody();
-  return c.json(newUser);
-});
-
 export default app;
