@@ -24,10 +24,6 @@ app.post("/users/bad", async (c) => {
   const db = drizzle(c.env.DB);
   const result = await db.select().from(users).all();
 
-  if (result.length === 0) {
-    return c.json({ message: "No users found" }, 404);
-  }
-
   return c.json(
     {
       result,
