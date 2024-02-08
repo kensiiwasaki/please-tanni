@@ -13,6 +13,7 @@ app.get("/users/best", async (c) => {
   const result = await db.select().from(users).all();
 
   c.header("Content-Type", "application/json");
+  c.header("Cache-Control", "public, max-age=60");
   return c.json({ result });
 });
 
